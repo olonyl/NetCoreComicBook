@@ -47,6 +47,9 @@ namespace NicaSource.Controllers
         [HttpGet("comic/{id}")]
         public async Task<IActionResult> comic(int id)
         {
+
+            string urlAnterior = Request.Headers["Referer"].ToString();
+
             BookModel lastBook = new BookModel();
             BookModel currentBook = new BookModel();
             HttpResponseMessage response;
@@ -70,7 +73,7 @@ namespace NicaSource.Controllers
 
 
                     int index = id;
-                    while (index < lastBook.Last)
+                    while (index < lastBook.Last || index > BookModel.IndexFirst)
                     {
                         string url = "https://xkcd.com/" + index.ToString() + "/info.0.json";
                         using (response = await httpClient.GetAsync(url))
@@ -85,7 +88,7 @@ namespace NicaSource.Controllers
                             }
                             else
                             {
-                                index++;
+                                index = index + Helper.GetUrlComicIDIncrement(urlAnterior, id);
                             }
                         }
                     }
