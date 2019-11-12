@@ -5,7 +5,7 @@ public class Helper
 
         int indexOf = urlAnterior.LastIndexOf("/");
         int qty = urlAnterior.Length - indexOf;
-        int valueToSum = 0;
+        int valueToSum = 1;
         if (urlAnterior.Length > 0 && urlAnterior.Contains("/"))
         {
             string strNum = urlAnterior.Substring(indexOf + 1, qty - 1);
