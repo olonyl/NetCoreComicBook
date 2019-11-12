@@ -68,7 +68,7 @@ namespace NicaSource.Controllers
                     lastBook = JsonConvert.DeserializeObject<BookModel>(content);
                     lastBook.Last = lastBook.Num;
 
-                    if (id == 0)
+                    if (id == 0 || id < BookModel.IndexFirst || id > lastBook.Num)
                         return View("Index", lastBook);
 
 
